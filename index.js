@@ -1,7 +1,17 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
+import mongoose from 'mongoose'
 
 const app = express()
+
+const password = '4qz3qWU4ky1DLtF3'
+mongoose
+	.set('strictQuery', false)
+	.connect(
+		`mongodb+srv://admin:${password}@cluster0.xygibto.mongodb.net/?retryWrites=true&w=majority`
+	)
+	.then(() => console.log('DB connected'))
+	.catch(err => console.log(`DB error`, err))
 
 app.use(express.json())
 
