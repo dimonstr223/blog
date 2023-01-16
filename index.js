@@ -25,6 +25,8 @@ app.post('/auth/register', registerValidation, (req, res) => {
 		return res.status(400).json(errors.array())
 	}
 
+	const password = req.body.password
+
 	const doc = new UserModel({
 		email: req.body.email,
 		fullName: req.body.fullName,
