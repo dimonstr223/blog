@@ -37,9 +37,9 @@ app.post('/auth/register', registerValidation, async (req, res) => {
 		passwordHash,
 	})
 
-	res.json({
-		success: true,
-	})
+	const user = await doc.save()
+
+	res.json(user)
 })
 
 const port = 4444
