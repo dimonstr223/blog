@@ -46,6 +46,12 @@ app.get('/posts/:id', PostController.getOne)
 app.post('/posts', checkAuth, postCreateValidation, PostController.create)
 app.delete('/posts/:id', checkAuth, PostController.remove)
 app.patch('/posts/:id', checkAuth, PostController.update)
+//UPLOAD
+app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+	res.json({
+		url: `uploads/${req.file.originalname}`,
+	})
+})
 
 const port = 4444
 
