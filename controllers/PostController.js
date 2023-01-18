@@ -132,7 +132,8 @@ export const update = async (req, res) => {
 				res.json({ success: true })
 			}
 		)
-	} catch (error) {
+	} catch (err) {
+		console.log(err)
 		res.status(500).json({
 			message: 'Post updating error',
 		})
