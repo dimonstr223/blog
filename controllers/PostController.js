@@ -8,11 +8,46 @@ export const getAll = async (req, res) => {
 	} catch (err) {
 		console.log(err)
 		res.status(500).json({
+			message: 'Getting posts error',
+		})
+	}
+}
+export const getOne = (req, res) => {
+	try {
+		const postId = req.params.id
+
+		PostModel.findOneAndUpdate(
+			{
+				_id: postId,
+			},
+			{
+				$inc: { viewCount: 1 },
+			},
+			{
+				returnDocument: 'after',
+			},
+			(err, doc) => {
+				if (err) {
+					return res.status(500).json({
+						message: 'Returning post error',
+					})
+				}
+				if (!doc) {
+					return res.status(404).json({
+						message: 'Post not found',
+					})
+				}
+
+				res.json(doc)
+			}
+		)
+	} catch (err) {
+		console.log(err)
+		res.status(500).json({
 			message: 'Getting post error',
 		})
 	}
 }
-
 export const create = async (req, res) => {
 	try {
 		const doc = new PostModel({
