@@ -28,11 +28,13 @@ export const getOne = (req, res) => {
 			},
 			(err, doc) => {
 				if (err) {
+					console.log(err)
 					return res.status(500).json({
 						message: 'Returning post error',
 					})
 				}
 				if (!doc) {
+					console.log(err)
 					return res.status(404).json({
 						message: 'Post not found',
 					})
@@ -77,6 +79,7 @@ export const remove = (req, res) => {
 				_id: postId,
 			},
 			(err, doc) => {
+				console.log(err)
 				if (err) {
 					return res.status(500).json({
 						message: 'Post deleting error',
@@ -93,7 +96,7 @@ export const remove = (req, res) => {
 			}
 		)
 	} catch (err) {
-		console.log('err')
+		console.log(err)
 		res.status(500).json({
 			message: 'Post deleting error',
 		})
