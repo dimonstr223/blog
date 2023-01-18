@@ -1,5 +1,18 @@
 import PostModel from '../models/Post.js'
 
+export const getAll = async (req, res) => {
+	try {
+		const posts = await PostModel.find()
+
+		res.json(posts)
+	} catch (err) {
+		console.log(err)
+		res.status(404).json({
+			message: 'Not found',
+		})
+	}
+}
+
 export const create = async (req, res) => {
 	try {
 		const doc = new PostModel({
