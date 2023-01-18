@@ -30,6 +30,7 @@ app.post('/auth/register', registerValidation, UserController.register)
 app.get('/auth/me', checkAuth, UserController.getMe)
 //POSTS
 app.get('/posts', PostController.getAll)
+app.get('/posts/:id', PostController.getOne)
 app.post('/posts', checkAuth, postCreateValidation, PostController.create)
 
 const port = 4444
