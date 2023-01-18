@@ -68,3 +68,29 @@ export const create = async (req, res) => {
 		})
 	}
 }
+export const remove = (req, res) => {
+	try {
+		const postId = req.params.id
+
+		PostModel.findOneAndDelete(
+			{
+				_id: postId,
+			},
+			(err, doc) => {
+				if (err) {
+					return res.status(500).json({
+						message: 'Post deleting error',
+					})
+				}
+				if (!doc) {
+					console.log(err)
+					return res.status(404).json({
+						message: 'Post not found',
+					})
+				}
+
+				res.json({ success: true })
+			}
+		)
+	} catch (err) {}
+}
