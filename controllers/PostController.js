@@ -105,6 +105,7 @@ export const remove = (req, res) => {
 export const update = async (req, res) => {
 	try {
 		const postId = req.params.id
+
 		await PostModel.updateOne(
 			{
 				_id: postId,
@@ -115,23 +116,9 @@ export const update = async (req, res) => {
 				tags: req.body.tags,
 				user: req.userId,
 				imageUrl: req.body.imageUrl,
-			},
-			(err, doc) => {
-				if (err) {
-					console.log(err)
-					return res.status(500).json({
-						message: 'Post deleting error',
-					})
-				}
-				if (!doc) {
-					console.log(err)
-					return res.status(404).json({
-						message: 'Post not found',
-					})
-				}
-				res.json({ success: true })
 			}
 		)
+		res.json({ success: true })
 	} catch (err) {
 		console.log(err)
 		res.status(500).json({
