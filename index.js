@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import multer from 'multer'
 
 import {
 	registerValidation,
@@ -11,6 +12,17 @@ import * as UserController from './controllers/UserController.js'
 import * as PostController from './controllers/PostController.js'
 
 const app = express()
+
+const storage = multer.diskStorage({
+	destination: (_, __, cb) => {
+		cb(null, 'uploads')
+	},
+	filename: (_, file, cb) => {
+		cb(null, file.originalname)
+	},
+})
+
+const upload = multer({ storage })
 
 const password = '4qz3qWU4ky1DLtF3'
 mongoose
