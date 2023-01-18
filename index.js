@@ -7,10 +7,9 @@ import {
 	loginValidation,
 	postCreateValidation,
 } from './validations.js'
-import checkAuth from './utils/checkAuth.js'
-import * as UserController from './controllers/UserController.js'
-import * as PostController from './controllers/PostController.js'
-import handleValidationErrors from './utils/handleValidationErrors.js'
+
+import { checkAuth, handleValidationErrors } from './utils/index.js'
+import { PostController, UserController } from './controllers/index.js'
 
 const app = express()
 
