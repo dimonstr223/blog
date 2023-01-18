@@ -1,9 +1,14 @@
 import express from 'express'
 import mongoose from 'mongoose'
 
-import { registerValidation, loginValidation } from './validations.js'
+import {
+	registerValidation,
+	loginValidation,
+	postCreateValidation,
+} from './validations.js'
 import checkAuth from './utils/checkAuth.js'
 import * as UserController from './controllers/UserController.js'
+import * as PostController from './controllers/PostController.js'
 
 const app = express()
 
@@ -19,9 +24,12 @@ mongoose
 app.use(express.json())
 
 // ROUTES
+// AUTH
 app.post('/auth/login', loginValidation, UserController.login)
 app.post('/auth/register', registerValidation, UserController.register)
 app.get('/auth/me', checkAuth, UserController.getMe)
+//POSTS
+app.post('/posts', checkAuth, postCreateValidation, PostController.create)
 
 const port = 4444
 
