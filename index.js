@@ -71,6 +71,7 @@ app.patch(
 	handleValidationErrors,
 	PostController.update
 )
+app.get('/tags', PostController.getLastTags)
 //UPLOAD
 app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
 	res.json({
